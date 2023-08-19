@@ -1,8 +1,7 @@
 import axios from "axios";
 import { useQuery } from "react-query";
 import { GetMoviesResult, RecordType } from "../types";
-
-const apiUrl = "http://www.omdbapi.com/?apikey=54f51e3f";
+import { apiUrl } from "../api";
 
 const useMoviesQuery = (
   searchText?: string,
@@ -29,7 +28,7 @@ const useMoviesQuery = (
       const response = await axios.get<GetMoviesResult>(url);
       return response.data;
     },
-    { staleTime: 10 * 60 * 1000, keepPreviousData: true }
+    { staleTime: 10 * 60 * 1000, keepPreviousData: true, enabled: !!searchText }
   );
 
 export default useMoviesQuery;

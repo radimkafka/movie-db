@@ -1,8 +1,7 @@
 import axios from "axios";
 import { useQuery } from "react-query";
 import { GetMoviesResult, RecordType } from "../types";
-
-const apiUrl = "http://www.omdbapi.com/?apikey=54f51e3f";
+import { apiUrl } from "../api";
 
 const useMoviesQuery = (
   searchText?: string,

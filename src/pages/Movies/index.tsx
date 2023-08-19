@@ -13,11 +13,7 @@ const Movies = () => {
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Typography variant="h3">Movie DB</Typography>
         <IconButton sx={{ ml: 1 }} onClick={colorMode.toggle} color="inherit">
-          {colorMode.mode === "dark" ? (
-            <Brightness7Icon />
-          ) : (
-            <Brightness4Icon />
-          )}
+          {colorMode.mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
         </IconButton>
       </Box>
       <Paper sx={{ p: 2 }}>

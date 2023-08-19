@@ -1,30 +1,33 @@
 const favoriteMoviesStorageKey = "favorite-movies";
 
 export function addToFavoriteMovies(id: string) {
-  const favs = getFavourites();
+  const favs = getFavoriteMovies();
   if (!favs.includes(id)) {
-    updateFavoriteMovies([...favs, id]);
+    return updateFavoriteMovies([...favs, id]);
   }
+  return [];
 }
 export function removeFromFavoriteMovies(id: string) {
-  const favs = getFavourites();
+  const favs = getFavoriteMovies();
   if (favs.includes(id)) {
-    updateFavoriteMovies(favs.filter((a) => a !== id));
+    return updateFavoriteMovies(favs.filter((a) => a !== id));
   }
+  return [];
 }
 
-export function getFavourites(): string[] {
+export function getFavoriteMovies(): string[] {
   const favs = JSON.parse(localStorage.getItem(favoriteMoviesStorageKey) ?? "null");
   if (isValueValid(favs)) return favs;
   return [];
 }
 
 export function isFavorite(id?: string) {
-  return id ? getFavourites().includes(id) : false;
+  return id ? getFavoriteMovies().includes(id) : false;
 }
 
 function updateFavoriteMovies(val: string[]) {
   localStorage.setItem(favoriteMoviesStorageKey, JSON.stringify(val));
+  return val;
 }
 
 function isValueValid(value: unknown): value is Array<string> {

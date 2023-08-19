@@ -5,9 +5,12 @@ import useMoviesQuery from "../../hooks/useMoviesQuery";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import { IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import FavoriteButton from "../../components/FavoriteButton";
+import useFavourites from "../../hooks/useFavoriteMovies";
 
 const MoviesDataGrid = () => {
   const [searchParams, setSearchParams] = useMoviesSearchParams();
+  const { isFavorite, update } = useFavourites();
   const { data, isFetching } = useMoviesQuery(
     searchParams.name,
     searchParams.year,
@@ -15,8 +18,15 @@ const MoviesDataGrid = () => {
     searchParams.page
   );
   const navigate = useNavigate();
-
-  const columns: TGridColDef<MovieInfo, "Detail">[] = [
+  const columns: TGridColDef<MovieInfo, "Favorite" | "Detail">[] = [
+    {
+      field: "Favorite",
+      renderCell: (a) => (
+        <FavoriteButton favorite={isFavorite(a.row.imdbID)} size="small" onClick={(_) => update(a.row.imdbID)} />
+      ),
+      sortable: false,
+      renderHeader: (_) => <></>,
+    },
     {
       field: "Title",
       flex: 1,
@@ -35,10 +45,7 @@ const MoviesDataGrid = () => {
     {
       field: "Detail",
       renderCell: (a) => (
-        <IconButton
-          onClick={(_) => navigate(`/${a.row.imdbID}`)}
-          color="inherit"
-        >
+        <IconButton onClick={(_) => navigate(`/${a.row.imdbID}`)} color="inherit">
           <VisibilityOutlinedIcon />
         </IconButton>
       ),

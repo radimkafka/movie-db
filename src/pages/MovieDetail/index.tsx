@@ -4,10 +4,9 @@ import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import MovieInfoRow from "./MovieInfoRow";
 import useMovieDetailQuery from "../../hooks/useMovieDetailQuery";
 import MovieRating from "./MovieRating";
-import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
-import StarOutlinedIcon from "@mui/icons-material/StarOutlined";
 import { addToFavoriteMovies, isFavorite, removeFromFavoriteMovies } from "../../utils/favorites";
 import { useState } from "react";
+import FavoriteButton from "../../components/FavoriteButton";
 
 const MovieDetail = () => {
   const { id } = useParams();
@@ -35,7 +34,6 @@ const MovieDetail = () => {
         <Grid item>
           <IconButton
             onClick={(_) => {
-              console.log("location.key: ", location.key);
               if (location.key !== "default") {
                 navigate(-1);
               } else {
@@ -50,9 +48,7 @@ const MovieDetail = () => {
           <Typography variant="h3">{data?.Title}</Typography>
         </Grid>
         <Grid item>
-          <IconButton onClick={handleFavouriteClick} size="large">
-            {favorite ? <StarOutlinedIcon sx={{ color: (a) => a.palette.warning.main }} /> : <StarBorderOutlinedIcon />}
-          </IconButton>
+          <FavoriteButton onClick={handleFavouriteClick} size="large" favorite={favorite} />
         </Grid>
       </Grid>
       <Paper sx={{ p: 2 }}>

@@ -57,7 +57,7 @@ const MoviesDataGrid = () => {
       getRowId={(a) => a.imdbID}
       loading={isFetching}
       paginationMode="server"
-      pageSizeOptions={[25]}
+      pageSizeOptions={[10]}
       paginationModel={{
         pageSize: 10,
         page: searchParams.page ? searchParams.page - 1 : 0,

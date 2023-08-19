@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   Box,
   CircularProgress,
@@ -11,11 +11,13 @@ import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import MovieInfoRow from "./MovieInfoRow";
 import useMovieDetailQuery from "../../hooks/useMovieDetailQuery";
 import MovieRating from "./MovieRating";
+import Router from "../../Router";
 
 const MovieDetail = () => {
   const { id } = useParams();
   const { data, isLoading } = useMovieDetailQuery(id);
   const navigate = useNavigate();
+  const location = useLocation();
 
   if (isLoading) return <CircularProgress />;
 
@@ -25,7 +27,12 @@ const MovieDetail = () => {
         <Grid item>
           <IconButton
             onClick={(_) => {
-              navigate(-1);
+              console.log("location.key: ", location.key);
+              if (location.key !== "default") {
+                navigate(-1);
+              } else {
+                navigate({ pathname: "/" });
+              }
             }}
           >
             <ArrowBackOutlinedIcon />

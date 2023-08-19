@@ -1,18 +1,36 @@
 import { useCallback, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 
+export type MoviesSearchParams = {
+  name?: string | undefined;
+  page?: number;
+};
+
 const useMoviesSearchParams = (): [
-  string | undefined,
-  (movieName?: string) => void
+  MoviesSearchParams,
+  (params?: MoviesSearchParams) => void
 ] => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const params = useMemo(
-    () => (searchParams.has("name") ? searchParams.get("name")! : undefined),
+  const params = useMemo<MoviesSearchParams>(
+    () => ({
+      name: searchParams.has("name") ? searchParams.get("name")! : undefined,
+      page: searchParams.has("page")
+        ? Number(searchParams.get("page"))
+        : undefined,
+    }),
     [searchParams]
   );
   const setParams = useCallback(
-    (movieName?: string) => {
-      setSearchParams(movieName ? { name: movieName } : {});
+    (params?: MoviesSearchParams) => {
+      const newParams = params
+        ? Object.fromEntries(
+            Object.entries(params)
+              .filter((a) => !!a[1])
+              .map((a) => [a[0], a[1].toString()])
+          )
+        : undefined;
+      console.log(newParams);
+      setSearchParams(newParams);
     },
     [setSearchParams]
   );

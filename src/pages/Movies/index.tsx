@@ -1,38 +1,18 @@
-import { Grid, TextField, debounce } from "@mui/material";
-import { useCallback, useState } from "react";
+import { Grid, Paper } from "@mui/material";
 import MoviesDataGrid from "./MoviesDataGrid";
-import useMoviesSearchParams from "../../hooks/useMoviesSearchParams";
+import Search from "./Search";
 
-const Movies = () => {
-  const [searchParams, setSearchParams] = useMoviesSearchParams();
-  const [searchText, setSearchText] = useState(searchParams);
-
-  const search = useCallback(
-    debounce((text?: string) => {
-      setSearchParams(text);
-    }, 500),
-    [setSearchParams]
-  );
-
-  return (
-    <>
-      <Grid container>
-        <Grid item>
-          <TextField
-            title="Name"
-            value={searchText ?? ""}
-            onChange={(a) => {
-              setSearchText(a.target.value);
-              search(a.target.value);
-            }}
-          />
-        </Grid>
+const Movies = () => (
+  <Paper sx={{ m: 2, p: 2 }}>
+    <Grid container>
+      <Grid item sx={{ mb: 2 }}>
+        <Search />
       </Grid>
-      <Grid item>
+      <Grid item xs={12}>
         <MoviesDataGrid />
       </Grid>
-    </>
-  );
-};
+    </Grid>
+  </Paper>
+);
 
 export default Movies;

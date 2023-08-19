@@ -7,26 +7,31 @@ import { IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const MoviesDataGrid = () => {
-  const [searchParams] = useMoviesSearchParams();
-  const { data, isLoading } = useMoviesQuery(searchParams);
+  const [searchParams, setSearchParams] = useMoviesSearchParams();
+  const { data, isLoading } = useMoviesQuery(
+    searchParams.name,
+    searchParams.page
+  );
   const navigate = useNavigate();
 
   const columns: TGridColDef<MovieInfo, "Detail">[] = [
     {
       field: "Title",
       flex: 1,
+      sortable: false,
     },
     {
       field: "Year",
       flex: 1,
+      sortable: false,
     },
     {
       field: "Type",
       flex: 1,
+      sortable: false,
     },
     {
       field: "Detail",
-      flex: 1,
       renderCell: (a) => (
         <IconButton
           onClick={(_) => navigate(`/${a.row.imdbID}`)}
@@ -35,15 +40,29 @@ const MoviesDataGrid = () => {
           <VisibilityOutlinedIcon />
         </IconButton>
       ),
+      sortable: false,
     },
   ];
 
   return (
     <DataGrid
+      disableColumnFilter
+      disableColumnMenu
+      disableColumnSelector
       columns={columns}
-      rows={data ?? []}
+      rows={data?.Search ?? []}
       getRowId={(a) => a.imdbID}
       loading={isLoading}
+      paginationMode="server"
+      pageSizeOptions={[25]}
+      paginationModel={{
+        pageSize: 10,
+        page: searchParams.page ? searchParams.page - 1 : 0,
+      }}
+      rowCount={data?.totalResults ? Number(data?.totalResults) : 0}
+      onPaginationModelChange={(a) => {
+        setSearchParams({ ...searchParams, page: a.page + 1 });
+      }}
     />
   );
 };

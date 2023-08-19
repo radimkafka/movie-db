@@ -46,7 +46,7 @@ export type MovieRating = {
   Value: string;
 };
 
-export function isRecordType(value?: any): value is RecordType {
+export function isRecordType(value?: unknown): value is RecordType {
   return (
     value === "movie" ||
     value === "series" ||

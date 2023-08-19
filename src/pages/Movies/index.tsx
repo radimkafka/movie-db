@@ -10,7 +10,7 @@ const Movies = () => {
 
   return (
     <Box sx={{ m: 2 }}>
-      <Box display="flex" justifyContent="space-between">
+      <Box display="flex" justifyContent="space-between" alignItems="center">
         <Typography variant="h3">Movie DB</Typography>
         <IconButton sx={{ ml: 1 }} onClick={colorMode.toggle} color="inherit">
           {colorMode.mode === "dark" ? (

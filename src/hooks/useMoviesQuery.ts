@@ -28,7 +28,7 @@ const useMoviesQuery = (
       const response = await axios.get<GetMoviesResult>(url);
       return response.data;
     },
-    { staleTime: 10 * 60 * 1000, keepPreviousData: true }
+    { staleTime: 10 * 60 * 1000, keepPreviousData: true, enabled: !!searchText }
   );
 
 export default useMoviesQuery;

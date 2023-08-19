@@ -26,6 +26,7 @@ const MoviesDataGrid = () => {
       ),
       sortable: false,
       renderHeader: (_) => <></>,
+      width: 65,
     },
     {
       field: "Title",
@@ -50,6 +51,8 @@ const MoviesDataGrid = () => {
         </IconButton>
       ),
       sortable: false,
+      renderHeader: (_) => <></>,
+      width: 65,
     },
   ];
 

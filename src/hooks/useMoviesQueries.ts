@@ -2,13 +2,10 @@ import axios from "axios";
 import { useQueries } from "react-query";
 import { Movie } from "../types";
 import { apiUrl } from "../api";
-import useFavourites from "./useFavoriteMovies";
 
-const useFavoriteMoviesQuery = () => {
-  const { favoriteMovies } = useFavourites();
-
+const useMoviesQueries = (movies: string[]) => {
   return useQueries(
-    favoriteMovies.map((a) => ({
+    movies.map((a) => ({
       queryKey: ["movie", a],
       queryFn: async () => {
         const response = await axios.get<Movie>(`${apiUrl}&i=${a}`);
@@ -19,4 +16,4 @@ const useFavoriteMoviesQuery = () => {
   );
 };
 
-export default useFavoriteMoviesQuery;
+export default useMoviesQueries;

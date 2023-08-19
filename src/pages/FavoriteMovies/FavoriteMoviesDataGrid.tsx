@@ -4,12 +4,12 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import { IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import FavoriteButton from "../../components/FavoriteButton";
-import useFavoriteMoviesQuery from "../../hooks/useFavoriteMoviesQuery";
+import useMoviesQueries from "../../hooks/useMoviesQueries";
 import useFavourites from "../../hooks/useFavoriteMovies";
 
 const FavoriteMoviesMoviesDataGrid = () => {
-  const { update, isFavorite } = useFavourites();
-  const queries = useFavoriteMoviesQuery();
+  const { favoriteMovies, update, isFavorite } = useFavourites();
+  const queries = useMoviesQueries(favoriteMovies);
 
   const navigate = useNavigate();
   const columns: TGridColDef<Movie, "Favorite" | "Detail">[] = [
@@ -20,6 +20,7 @@ const FavoriteMoviesMoviesDataGrid = () => {
       ),
       sortable: false,
       renderHeader: (_) => <></>,
+      width: 65,
     },
     {
       field: "Title",
@@ -44,6 +45,8 @@ const FavoriteMoviesMoviesDataGrid = () => {
         </IconButton>
       ),
       sortable: false,
+      renderHeader: (_) => <></>,
+      width: 65,
     },
   ];
 
@@ -57,13 +60,14 @@ const FavoriteMoviesMoviesDataGrid = () => {
       rows={queries.map((a) => a.data).filter((a): a is Movie => !!a) ?? []}
       getRowId={(a) => a.imdbID}
       loading={queries.some((a) => a.isFetching)}
-      paginationMode="client"
+      // paginationMode="client"
       pageSizeOptions={[10]}
+      initialState={{ pagination: { paginationModel: { page: 0, pageSize: 10 } } }}
+      rowCount={queries.length}
       // paginationModel={{
       //   pageSize: 10,
       //   page: searchParams.page ? searchParams.page - 1 : 0,
       // }}
-      // rowCount={queries.length}
       // onPaginationModelChange={(a) => {
       //   setSearchParams({ ...searchParams, page: a.page + 1 });
       // }}

@@ -29,7 +29,7 @@ const MovieDetail = () => {
   };
 
   return (
-    <Box m={2}>
+    <>
       <Grid container alignItems="center">
         <Grid item>
           <IconButton
@@ -119,7 +119,7 @@ const MovieDetail = () => {
           )}
         </Grid>
       </Paper>
-    </Box>
+    </>
   );
 };
 

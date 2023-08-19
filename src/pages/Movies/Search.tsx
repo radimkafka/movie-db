@@ -20,7 +20,7 @@ const Search = () => {
   );
   return (
     <Grid container spacing={2}>
-      <Grid item lg={3}>
+      <Grid item xs={12} sm={4} md={3} lg={3} xl={2}>
         <TextField
           label="Movie name"
           variant="outlined"
@@ -32,7 +32,7 @@ const Search = () => {
           }}
         />
       </Grid>
-      <Grid item lg={3}>
+      <Grid item xs={12} sm={4} md={3} lg={3} xl={2}>
         <TextField
           disabled={!searchText}
           label="Type"
@@ -52,10 +52,11 @@ const Search = () => {
           <MenuItem value={"game"}>game</MenuItem>
         </TextField>
       </Grid>
-      <Grid item lg={3}>
+      <Grid item xs={12} sm={4} md={3} lg={3} xl={2}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             disabled={!searchText}
+            sx={{ width: "100%" }}
             label="Year"
             views={["year"]}
             value={searchParams.year ? dayjs().year(searchParams.year) : null}

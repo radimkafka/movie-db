@@ -26,7 +26,7 @@ const MovieRating = ({ ratings }: Props) => {
     <>
       {ratings?.map((a) => (
         <Box key={a.Source}>
-          <Typography component="legend">{a.Source}</Typography>
+          <Typography>{a.Source}</Typography>
           <Tooltip title={a.Value}>
             <Rating
               value={convertRating(a.Value)}

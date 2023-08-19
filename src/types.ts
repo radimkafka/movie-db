@@ -28,7 +28,7 @@ export type Movie = {
   Country: string;
   Awards: string;
   Poster: string;
-  Ratings: Rating[];
+  Ratings: MovieRating[];
   Metascore: string;
   imdbRating: string;
   imdbVotes: string;
@@ -41,14 +41,14 @@ export type Movie = {
   Response: string;
 };
 
-export type Rating = {
+export type MovieRating = {
   Source: string;
   Value: string;
 };
 
-export type TGridColDef<T extends GridValidRowModel = any> = Omit<
-  GridColDef<T>,
-  "field"
-> & {
-  field: keyof T;
+export type TGridColDef<
+  T extends GridValidRowModel = any,
+  TExtraRows extends string = never
+> = Omit<GridColDef<T>, "field"> & {
+  field: keyof T | TExtraRows;
 };

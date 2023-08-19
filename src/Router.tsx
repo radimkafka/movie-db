@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Movies from "./pages/Movies";
-import MovieDetail from "./pages/MovieDetail";
+import MovieDetail from "./pages/Movies/MovieDetail";
 
 const Router = createBrowserRouter([
   {

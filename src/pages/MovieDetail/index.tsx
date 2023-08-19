@@ -1,5 +1,5 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { Box, CircularProgress, Grid, IconButton, Paper, Typography } from "@mui/material";
+import { CircularProgress, Grid, IconButton, Paper, Typography } from "@mui/material";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import MovieInfoRow from "./MovieInfoRow";
 import useMovieDetailQuery from "../../hooks/useMovieDetailQuery";

@@ -4,6 +4,9 @@ import useMoviesSearchParams, {
   MoviesSearchParams,
 } from "../../hooks/useMoviesSearchParams";
 import { isRecordType } from "../../types";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
 
 const Search = () => {
   const [searchParams, setSearchParams] = useMoviesSearchParams();
@@ -47,6 +50,18 @@ const Search = () => {
           <MenuItem value={"episode"}>episode</MenuItem>
           <MenuItem value={"game"}>game</MenuItem>
         </TextField>
+      </Grid>
+      <Grid item lg={3}>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
+            label="Year"
+            views={["year"]}
+            value={searchParams.year ? dayjs().year(searchParams.year) : null}
+            onChange={(a) =>
+              setSearchParams({ ...searchParams, year: a?.year() })
+            }
+          />
+        </LocalizationProvider>
       </Grid>
     </Grid>
   );

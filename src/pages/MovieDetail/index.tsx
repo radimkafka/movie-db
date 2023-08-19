@@ -36,10 +36,12 @@ const MovieDetail = () => {
         </Grid>
       </Grid>
       <Paper sx={{ p: 2 }}>
-        <Grid container>
-          <Grid item>
-            <img src={data?.Poster} />
-          </Grid>
+        <Grid container spacing={1}>
+          {data?.Poster && data.Poster !== "N/A" && (
+            <Grid item>
+              <img src={data?.Poster} />
+            </Grid>
+          )}
           <Grid item xs={12} md={6}>
             <Grid item md={11}>
               <MovieInfoRow title="Country" value={data?.Country} />
@@ -95,10 +97,12 @@ const MovieDetail = () => {
             <MovieRating ratings={data?.Ratings} />
           </Grid>
 
-          <Grid item md={12}>
-            <Typography variant="h6">Plot</Typography>
-            <Typography>{data?.Plot}</Typography>
-          </Grid>
+          {data?.Plot && data.Plot !== "N/A" && (
+            <Grid item md={12}>
+              <Typography variant="h6">Plot</Typography>
+              <Typography>{data?.Plot}</Typography>
+            </Grid>
+          )}
         </Grid>
       </Paper>
     </Box>

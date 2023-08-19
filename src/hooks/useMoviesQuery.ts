@@ -3,12 +3,7 @@ import { useQuery } from "react-query";
 import { GetMoviesResult, RecordType } from "../types";
 import { apiUrl } from "../api";
 
-const useMoviesQuery = (
-  searchText?: string,
-  year?: number,
-  type?: RecordType,
-  page?: number
-) =>
+const useMoviesQuery = (searchText?: string, year?: number, type?: RecordType, page?: number) =>
   useQuery(
     ["movies", searchText, , year, type, page],
     async (_) => {
@@ -28,7 +23,7 @@ const useMoviesQuery = (
       const response = await axios.get<GetMoviesResult>(url);
       return response.data;
     },
-    { staleTime: 10 * 60 * 1000, keepPreviousData: true, enabled: !!searchText }
+    { staleTime: 5 * 60 * 1000, keepPreviousData: true, enabled: !!searchText }
   );
 
 export default useMoviesQuery;

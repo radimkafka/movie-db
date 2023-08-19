@@ -38,7 +38,6 @@ const useMoviesSearchParams = (): [
               .map((a) => [a[0], a[1].toString()])
           )
         : undefined;
-      console.log(newParams);
       setSearchParams(newParams);
     },
     [setSearchParams]

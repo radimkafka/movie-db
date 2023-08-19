@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
-import { RecordType } from "../types";
+import { RecordType, isRecordType } from "../types";
 
 export type MoviesSearchParams = {
   name?: string | undefined;
@@ -19,6 +19,12 @@ const useMoviesSearchParams = (): [
       name: searchParams.has("name") ? searchParams.get("name")! : undefined,
       page: searchParams.has("page")
         ? Number(searchParams.get("page"))
+        : undefined,
+      year: searchParams.has("year")
+        ? Number(searchParams.get("year"))
+        : undefined,
+      type: isRecordType(searchParams.get("type"))
+        ? (searchParams.get("type") as RecordType)
         : undefined,
     }),
     [searchParams]

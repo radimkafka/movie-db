@@ -46,7 +46,16 @@ export type MovieRating = {
   Value: string;
 };
 
-export type RecordType = "movie" | "series" | "episode";
+export function isRecordType(value?: any): value is RecordType {
+  return (
+    value === "movie" ||
+    value === "series" ||
+    value === "episode" ||
+    value === "game"
+  );
+}
+
+export type RecordType = "movie" | "series" | "episode" | "game";
 
 export type TGridColDef<
   T extends GridValidRowModel = any,

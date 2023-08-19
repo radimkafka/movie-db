@@ -52,6 +52,7 @@ const MoviesDataGrid = () => {
       disableColumnMenu
       disableColumnSelector
       columns={columns}
+      autoHeight
       rows={data?.Search ?? []}
       getRowId={(a) => a.imdbID}
       loading={isFetching}

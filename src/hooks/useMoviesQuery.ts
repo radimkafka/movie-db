@@ -1,19 +1,35 @@
 import axios from "axios";
 import { useQuery } from "react-query";
-import { GetMoviesResult } from "../types";
+import { GetMoviesResult, RecordType } from "../types";
 
 const apiUrl = "http://www.omdbapi.com/?apikey=54f51e3f";
 
-const useMoviesQuery = (searchText?: string, page?: number) =>
+const useMoviesQuery = (
+  searchText?: string,
+  year?: number,
+  type?: RecordType,
+  page?: number
+) =>
   useQuery(
-    ["movies", searchText, page],
+    ["movies", searchText, , year, type, page],
     async (_) => {
-      const response = await axios.get<GetMoviesResult>(
-        `${apiUrl}&page=${page ?? 0}&s=${searchText}`
-      );
+      let url = apiUrl;
+      if (searchText) {
+        url += `&s=${searchText}`;
+      }
+      if (year) {
+        url += `&y=${year}`;
+      }
+      if (page) {
+        url += `&page=${page ?? 0}`;
+      }
+      if (type) {
+        url += `&type=${type}`;
+      }
+      const response = await axios.get<GetMoviesResult>(url);
       return response.data;
     },
-    { staleTime: 10 * 60 * 1000 }
+    { staleTime: 10 * 60 * 1000, keepPreviousData: true }
   );
 
 export default useMoviesQuery;

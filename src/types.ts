@@ -46,6 +46,8 @@ export type MovieRating = {
   Value: string;
 };
 
+export type RecordType = "movie" | "series" | "episode";
+
 export type TGridColDef<
   T extends GridValidRowModel = any,
   TExtraRows extends string = never

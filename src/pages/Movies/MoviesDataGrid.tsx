@@ -8,8 +8,10 @@ import { useNavigate } from "react-router-dom";
 
 const MoviesDataGrid = () => {
   const [searchParams, setSearchParams] = useMoviesSearchParams();
-  const { data, isLoading } = useMoviesQuery(
+  const { data, isFetching } = useMoviesQuery(
     searchParams.name,
+    searchParams.year,
+    searchParams.type,
     searchParams.page
   );
   const navigate = useNavigate();
@@ -52,7 +54,7 @@ const MoviesDataGrid = () => {
       columns={columns}
       rows={data?.Search ?? []}
       getRowId={(a) => a.imdbID}
-      loading={isLoading}
+      loading={isFetching}
       paginationMode="server"
       pageSizeOptions={[25]}
       paginationModel={{

@@ -42,7 +42,7 @@ const MovieDetail = () => {
               <img src={data?.Poster} />
             </Grid>
           )}
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={9}>
             <Grid item md={11}>
               <MovieInfoRow title="Country" value={data?.Country} />
             </Grid>

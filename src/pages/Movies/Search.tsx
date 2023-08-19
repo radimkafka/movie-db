@@ -34,6 +34,7 @@ const Search = () => {
       </Grid>
       <Grid item lg={3}>
         <TextField
+          disabled={!searchText}
           label="Type"
           select
           variant="outlined"
@@ -54,6 +55,7 @@ const Search = () => {
       <Grid item lg={3}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
+            disabled={!searchText}
             label="Year"
             views={["year"]}
             value={searchParams.year ? dayjs().year(searchParams.year) : null}

@@ -35,7 +35,7 @@ jobs:
       - name: Build
         run: npm run build
       - name: Create404
-        run: cp ./dist/index.html .dist/404.html
+        run: cp ./dist/index.html ./dist/404.html
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact

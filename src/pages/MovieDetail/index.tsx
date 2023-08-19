@@ -1,32 +1,39 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import {
-  Box,
-  CircularProgress,
-  Grid,
-  IconButton,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { Box, CircularProgress, Grid, IconButton, Paper, Typography } from "@mui/material";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import MovieInfoRow from "./MovieInfoRow";
 import useMovieDetailQuery from "../../hooks/useMovieDetailQuery";
 import MovieRating from "./MovieRating";
+import { addToFavoriteMovies, isFavorite, removeFromFavoriteMovies } from "../../utils/favorites";
+import { useState } from "react";
+import FavoriteButton from "../../components/FavoriteButton";
 
 const MovieDetail = () => {
   const { id } = useParams();
   const { data, isLoading } = useMovieDetailQuery(id);
   const navigate = useNavigate();
   const location = useLocation();
+  const [favorite, setFavorite] = useState(isFavorite(id));
 
   if (isLoading) return <CircularProgress />;
 
+  const handleFavouriteClick = () => {
+    if (!id) return;
+
+    if (favorite) {
+      removeFromFavoriteMovies(id);
+    } else {
+      addToFavoriteMovies(id);
+    }
+    setFavorite((a) => !a);
+  };
+
   return (
-    <Box m={2}>
+    <>
       <Grid container alignItems="center">
         <Grid item>
           <IconButton
             onClick={(_) => {
-              console.log("location.key: ", location.key);
               if (location.key !== "default") {
                 navigate(-1);
               } else {
@@ -37,8 +44,11 @@ const MovieDetail = () => {
             <ArrowBackOutlinedIcon />
           </IconButton>
         </Grid>
-        <Grid item md={11}>
+        <Grid item>
           <Typography variant="h3">{data?.Title}</Typography>
+        </Grid>
+        <Grid item>
+          <FavoriteButton onClick={handleFavouriteClick} size="large" favorite={favorite} />
         </Grid>
       </Grid>
       <Paper sx={{ p: 2 }}>
@@ -109,7 +119,7 @@ const MovieDetail = () => {
           )}
         </Grid>
       </Paper>
-    </Box>
+    </>
   );
 };
 

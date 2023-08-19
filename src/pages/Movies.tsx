@@ -1,11 +1,5 @@
-import React from 'react'
+const Movies = () => {
+  return <div>movies</div>;
+};
 
-type Props = {}
-
-const movies = (props: Props) => {
-  return (
-    <div>movies</div>
-  )
-}
-
-export default movies
+export default Movies;

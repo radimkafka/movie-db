@@ -1,7 +1,15 @@
-const Router = () => {
-  return (
-    <div>Router</div>
-  )
-}
+import { createBrowserRouter } from "react-router-dom";
+import Movies from "./pages/Movies";
+import MovieDetail from "./pages/MovieDetail";
 
-export default Router
+const Router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Movies />,
+  },
+  {
+    path: "/:id",
+    element: <MovieDetail />,
+  },
+]);
+export default Router;

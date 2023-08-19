@@ -1,11 +1,9 @@
-import React from 'react'
+import { useParams } from "react-router-dom";
 
-type Props = {}
+const MovieDetail = () => {
+  const { id } = useParams();
 
-const MovieDetail = (props: Props) => {
-  return (
-    <div>MovieDetail</div>
-  )
-}
+  return <div>MovieDetail:{id}</div>;
+};
 
-export default MovieDetail
+export default MovieDetail;

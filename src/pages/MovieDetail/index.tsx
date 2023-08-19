@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import MovieInfoRow from "./MovieInfoRow";
-import useMovieDetailQuery from "../../../hooks/useMovieDetailQuery";
+import useMovieDetailQuery from "../../hooks/useMovieDetailQuery";
 import MovieRating from "./MovieRating";
 
 const MovieDetail = () => {

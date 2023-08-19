@@ -1,5 +1,5 @@
 import { Box, Rating, Tooltip, Typography } from "@mui/material";
-import { MovieRating } from "../../../types";
+import { MovieRating } from "../../types";
 
 type Props = { ratings?: MovieRating[] };
 

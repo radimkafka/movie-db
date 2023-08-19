@@ -1,24 +1,33 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import {
-  Box,
-  CircularProgress,
-  Grid,
-  IconButton,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { Box, CircularProgress, Grid, IconButton, Paper, Typography } from "@mui/material";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import MovieInfoRow from "./MovieInfoRow";
 import useMovieDetailQuery from "../../hooks/useMovieDetailQuery";
 import MovieRating from "./MovieRating";
+import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
+import StarOutlinedIcon from "@mui/icons-material/StarOutlined";
+import { addToFavoriteMovies, isFavorite, removeFromFavoriteMovies } from "../../utils/favorites";
+import { useState } from "react";
 
 const MovieDetail = () => {
   const { id } = useParams();
   const { data, isLoading } = useMovieDetailQuery(id);
   const navigate = useNavigate();
   const location = useLocation();
+  const [favorite, setFavorite] = useState(isFavorite(id));
 
   if (isLoading) return <CircularProgress />;
+
+  const handleFavouriteClick = () => {
+    if (!id) return;
+
+    if (favorite) {
+      removeFromFavoriteMovies(id);
+    } else {
+      addToFavoriteMovies(id);
+    }
+    setFavorite((a) => !a);
+  };
 
   return (
     <Box m={2}>
@@ -37,8 +46,13 @@ const MovieDetail = () => {
             <ArrowBackOutlinedIcon />
           </IconButton>
         </Grid>
-        <Grid item md={11}>
+        <Grid item>
           <Typography variant="h3">{data?.Title}</Typography>
+        </Grid>
+        <Grid item>
+          <IconButton onClick={handleFavouriteClick} size="large">
+            {favorite ? <StarOutlinedIcon sx={{ color: (a) => a.palette.warning.main }} /> : <StarBorderOutlinedIcon />}
+          </IconButton>
         </Grid>
       </Grid>
       <Paper sx={{ p: 2 }}>

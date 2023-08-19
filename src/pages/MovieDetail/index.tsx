@@ -98,11 +98,9 @@ const MovieDetail = () => {
               <MovieInfoRow title="Votes" value={data?.imdbVotes} />
             </Grid>
           </Grid>
-
           <Grid item xs={12}>
             <MovieRating ratings={data?.Ratings} />
           </Grid>
-
           {data?.Plot && data.Plot !== "N/A" && (
             <Grid item xs={12}>
               <Typography variant="h6">Plot</Typography>

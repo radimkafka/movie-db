@@ -11,7 +11,6 @@ import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import MovieInfoRow from "./MovieInfoRow";
 import useMovieDetailQuery from "../../hooks/useMovieDetailQuery";
 import MovieRating from "./MovieRating";
-import Router from "../../Router";
 
 const MovieDetail = () => {
   const { id } = useParams();

@@ -60,7 +60,7 @@ const FavoriteMoviesMoviesDataGrid = () => {
       rows={queries.map((a) => a.data).filter((a): a is Movie => !!a) ?? []}
       getRowId={(a) => a.imdbID}
       loading={queries.some((a) => a.isFetching)}
-      // paginationMode="client"
+      rowSelection={false}
       pageSizeOptions={[10]}
       initialState={{ pagination: { paginationModel: { page: 0, pageSize: 10 } } }}
       rowCount={queries.length}

@@ -6,7 +6,7 @@ const Movies = () => {
   return (
     <>
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Typography variant="h3">Find movie</Typography>
+        <Typography variant="h3">Search a movie</Typography>
       </Box>
       <Paper sx={{ p: 2 }}>
         <Grid container>

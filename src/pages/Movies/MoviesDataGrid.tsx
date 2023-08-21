@@ -68,6 +68,7 @@ const MoviesDataGrid = () => {
       loading={isFetching}
       paginationMode="server"
       pageSizeOptions={[10]}
+      rowSelection={false}
       paginationModel={{
         pageSize: 10,
         page: searchParams.page ? searchParams.page - 1 : 0,

@@ -3,7 +3,7 @@ import MoviesDataGrid from "./MoviesDataGrid";
 import Search from "./Search";
 
 const Movies = () => {
-  const xs = useMediaQuery<Theme>((a) => a.breakpoints.down("sm"));
+  const xs = useMediaQuery<Theme>((a) => a.breakpoints.only("xs"));
   return (
     <>
       <Box display="flex" justifyContent="space-between" alignItems="center">

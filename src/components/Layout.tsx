@@ -8,7 +8,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 const Layout = () => {
   const colorMode = useColorMode();
   const navigate = useNavigate();
-  const xs = useMediaQuery<Theme>((a) => a.breakpoints.down("sm"));
+  const xs = useMediaQuery<Theme>((a) => a.breakpoints.only("xs"));
 
   return (
     <Box sx={{ flexGrow: 1 }}>

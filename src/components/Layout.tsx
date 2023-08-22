@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, IconButton, Link, Toolbar } from "@mui/material";
+import { AppBar, Box, Button, IconButton, Link, Theme, Toolbar, useMediaQuery } from "@mui/material";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useColorMode } from "../providers/ColorModeProvider";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
@@ -8,6 +8,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 const Layout = () => {
   const colorMode = useColorMode();
   const navigate = useNavigate();
+  const xs = useMediaQuery<Theme>((a) => a.breakpoints.down("sm"));
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -27,7 +28,7 @@ const Layout = () => {
 
           <Box>
             <Link href="https://github.com/radimkafka/movie-db" target="_blank" rel="noreferrer">
-              <IconButton color="default">
+              <IconButton sx={{ color: (t) => t.palette.common.white }}>
                 <GitHubIcon />
               </IconButton>
             </Link>
@@ -39,7 +40,7 @@ const Layout = () => {
           </Box>
         </Toolbar>
       </AppBar>
-      <Box sx={{ m: 2 }}>
+      <Box sx={{ m: xs ? 1 : 2 }}>
         <Outlet />
       </Box>
     </Box>
